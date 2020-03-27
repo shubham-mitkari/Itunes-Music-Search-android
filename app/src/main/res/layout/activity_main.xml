@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/searchTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:text="This is sample Android Itunes Search Application"
+        android:textColor="@android:color/black"
+        android:typeface="monospace" />
+
+    <EditText
+        android:id="@+id/main_search_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/searchTV"
+        android:layout_margin="8dp"
+        android:drawableEnd="@drawable/ic_search"
+        android:hint="Search"
+        android:lines="1" />
+
+    <Button
+        android:id="@+id/search_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_search_edit_text"
+        android:layout_margin="8dp"
+        android:background="@color/colorPrimary"
+        android:text="Search"
+        android:textColor="@android:color/white" />
+
+
+</RelativeLayout>
