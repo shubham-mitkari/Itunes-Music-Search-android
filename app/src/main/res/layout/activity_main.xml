@@ -23,7 +23,7 @@
         android:layout_margin="8dp"
         android:drawableEnd="@drawable/ic_search"
         android:hint="Search"
-        android:lines="1" />
+        android:maxLines="1" />
 
     <Button
         android:id="@+id/search_button"

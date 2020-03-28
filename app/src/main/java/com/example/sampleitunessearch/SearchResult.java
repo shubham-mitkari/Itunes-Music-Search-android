@@ -3,11 +3,19 @@ package com.example.sampleitunessearch;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import java.util.List;
 
 import androidx.appcompat.app.AppCompatActivity;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class SearchResult extends AppCompatActivity {
     ProgressBar progressBar;
+    private RetrofitClient retrofit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,22 +27,35 @@ public class SearchResult extends AppCompatActivity {
 
     private void searchingSong() {
 
-        Service client = RetrofitClient.createService(Service.class);
-//
-//        Call<List<Songs>> call=client.getSongs(searchTerm);
-//        call.enqueue(new Callback<List<Songs>>() {
-//            @Override
-//            public void onResponse(Call<List<Songs>> call, Response<List<Songs>> response) {
-//                List<Songs> songs = response.body();
-//                Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<Songs>> call, Throwable t) {
-//
-//            }
-//        });
+        Service client = retrofit.createService(Service.class);
+
+        Call<ResposnsePojo> call=client.getSongs("coldplay");
+
+        call.enqueue(new Callback<ResposnsePojo>() {
+            @Override
+            public void onResponse(Call<ResposnsePojo> call, Response<ResposnsePojo> response) {
+
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        progressBar.setVisibility(View.GONE);
+                        List<Songs>songsList=response.body().getSongsList();
+
+                        Toast.makeText(getApplicationContext(),songsList.toString(),Toast.LENGTH_LONG).show();
+
+                    } else {
+
+                        Toast.makeText(getApplicationContext(), "No jobs to show..", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ResposnsePojo> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
+                Toast.makeText(getApplicationContext(),"request failed",Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 }
