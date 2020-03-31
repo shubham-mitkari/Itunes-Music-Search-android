@@ -3,7 +3,7 @@ package com.example.sampleitunessearch;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-class Songs {
+public class Songs {
     @SerializedName("artistName")
     @Expose
     private String artistName;
@@ -16,7 +16,7 @@ class Songs {
 
     @SerializedName("imageUrl")
     @Expose
-    private String imageUrl;
+    private static String imageUrl;
 
     public Songs(String trackName, String artistName, String previewUrl) {
 
@@ -36,6 +36,10 @@ class Songs {
 
     public String getPreviewUrl() {
         return previewUrl;
+    }
+
+    public static String getImageUrl() {
+        return imageUrl;
     }
 
     public void setTrackName(String trackName) {
