@@ -1,4 +1,4 @@
-package com.example.sampleitunessearch;
+package com.example.sampleitunessearch.Model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

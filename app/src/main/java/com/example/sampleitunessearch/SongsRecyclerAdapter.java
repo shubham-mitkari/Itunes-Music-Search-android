@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.sampleitunessearch.Model.Songs;
 
 import java.util.List;
 
@@ -16,9 +17,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class SongsRecyclerAdapter extends RecyclerView.Adapter<SongsRecyclerAdapter.ViewHolder> {
 
-    List<Songs> songsList ;
+    Context context;
+    List<Songs> songsList;
 
-    SongsRecyclerAdapter(List<Songs> songsList) {
+    SongsRecyclerAdapter(Context context, List<Songs> songsList) {
+        this.context = context;
         this.songsList = songsList;
     }
 
@@ -50,7 +53,7 @@ public class SongsRecyclerAdapter extends RecyclerView.Adapter<SongsRecyclerAdap
 
     @Override
     public int getItemCount() {
-        return this.songsList.size();
+        return songsList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
