@@ -23,7 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SongsRecyclerAdapter.SongsAdapterListener {
     ProgressBar progressBar;
     private RetrofitClient retrofit;
     private SimpleExoPlayer player;
@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+        songsRecyclerAdapter = new SongsRecyclerAdapter(this,songsList,this);
+
     }
 
     @Override
@@ -95,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
                     if (response.body() != null) {
                         progressBar.setVisibility(View.GONE);
                         songsList = response.body().getSongsList();
-                        songsRecyclerAdapter = new SongsRecyclerAdapter(getApplicationContext(), songsList);
                         recyclerView.setAdapter(songsRecyclerAdapter);
                         Toast.makeText(getApplicationContext(), "request successful", Toast.LENGTH_LONG).show();
                     } else {
@@ -110,6 +111,12 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "request failed", Toast.LENGTH_LONG).show();
             }
         });
+
+    }
+
+    @Override
+    public void onSongSelected(Songs songs) {
+        Toast.makeText(getApplicationContext(), "Selected: " + songs.getTrackName(), Toast.LENGTH_LONG).show();
 
     }
 
