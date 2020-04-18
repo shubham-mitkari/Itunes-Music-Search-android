@@ -15,13 +15,13 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class SongsRecyclerAdapter extends RecyclerView.Adapter<SongsRecyclerAdapter.ViewHolder> {
+public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.ViewHolder> {
 
     Context context;
     List<Songs> songsList;
     private SongsAdapterListener listener;
 
-    SongsRecyclerAdapter(Context context, List<Songs> songsList, SongsAdapterListener listener) {
+    SongsAdapter(Context context, List<Songs> songsList, SongsAdapterListener listener) {
         this.context = context;
         this.songsList = songsList;
         this.listener = listener;
@@ -32,7 +32,7 @@ public class SongsRecyclerAdapter extends RecyclerView.Adapter<SongsRecyclerAdap
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflate the custom layout
         LayoutInflater inflater = LayoutInflater.from(context);
-        View view = inflater.inflate(R.layout.song_card_view, null);
+        View view = inflater.inflate(R.layout.item_view, parent,true);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

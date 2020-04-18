@@ -23,14 +23,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity implements SongsRecyclerAdapter.SongsAdapterListener {
+public class MainActivity extends AppCompatActivity implements SongsAdapter.SongsAdapterListener {
     ProgressBar progressBar;
     private RetrofitClient retrofit;
     private SimpleExoPlayer player;
     private DefaultHttpDataSourceFactory dataSourceFactory;
     private long playbackPosition;
     private String currentMediaUrl;
-    SongsRecyclerAdapter songsRecyclerAdapter;
+    SongsAdapter songsAdapter;
     RecyclerView recyclerView;
     private List<Songs> songsList;
     SearchView searchView;
@@ -47,13 +47,13 @@ public class MainActivity extends AppCompatActivity implements SongsRecyclerAdap
 
 //        player = new SimpleExoPlayer.Builder(getApplicationContext()).build();
 
-        List<Songs> songsList = new ArrayList<>();
+       songsList = new ArrayList<Songs>();
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        songsRecyclerAdapter = new SongsRecyclerAdapter(this,songsList,this);
+        songsAdapter = new SongsAdapter(this,songsList,this);
 
     }
 
@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements SongsRecyclerAdap
                     if (response.body() != null) {
                         progressBar.setVisibility(View.GONE);
                         songsList = response.body().getSongsList();
-                        recyclerView.setAdapter(songsRecyclerAdapter);
+                        recyclerView.setAdapter(songsAdapter);
                         Toast.makeText(getApplicationContext(), "request successful", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(getApplicationContext(), "No Songs to show..", Toast.LENGTH_LONG).show();
